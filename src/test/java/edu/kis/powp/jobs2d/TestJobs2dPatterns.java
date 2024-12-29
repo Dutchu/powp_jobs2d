@@ -8,14 +8,18 @@ import java.util.logging.Logger;
 import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.powp.appbase.Application;
+import edu.kis.powp.jobs2d.drivers.FigureDrawingStrategy;
 import edu.kis.powp.jobs2d.drivers.adapter.MyAdapter;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
 import edu.kis.powp.jobs2d.events.SelectTestFigureOptionListener;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
 import edu.kis.powp.jobs2d.features.DriverFeature;
+import edu.kis.powp.jobs2d.magicpresets.FiguresJoe;
 
 public class TestJobs2dPatterns {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	private final static FigureDrawingStrategy strategy1 = FiguresJoe::figureScript1;
+	private final static FigureDrawingStrategy strategy2 = FiguresJoe::figureScript2;
 
 	/**
 	 * Setup test concerning preset figures in context.
@@ -23,10 +27,15 @@ public class TestJobs2dPatterns {
 	 * @param application Application context.
 	 */
 	private static void setupPresetTests(Application application) {
-		SelectTestFigureOptionListener selectTestFigureOptionListener = new SelectTestFigureOptionListener(
-				DriverFeature.getDriverManager());
+		SelectTestFigureOptionListener listener1 = new SelectTestFigureOptionListener(
+				DriverFeature.getDriverManager(),
+				strategy1);
+		SelectTestFigureOptionListener listener2 = new SelectTestFigureOptionListener(
+				DriverFeature.getDriverManager(),
+				strategy2);
 
-		application.addTest("Figure Joe 1", selectTestFigureOptionListener);
+		application.addTest("Figure Joe 1", listener1);
+		application.addTest("Figure Joe 2", listener2);
 	}
 
 	/**
@@ -52,9 +61,10 @@ public class TestJobs2dPatterns {
 	 */
 	private static void setupDefaultDrawerVisibilityManagement(Application application) {
 		DefaultDrawerFrame defaultDrawerWindow = DefaultDrawerFrame.getDefaultDrawerFrame();
+		boolean initVisible = false;
 		application.addComponentMenuElementWithCheckBox(DrawPanelController.class, "Default Drawer Visibility",
-				new SelectChangeVisibleOptionListener(defaultDrawerWindow), true);
-		defaultDrawerWindow.setVisible(true);
+				new SelectChangeVisibleOptionListener(defaultDrawerWindow), initVisible);
+		defaultDrawerWindow.setVisible(initVisible);
 	}
 
 	/**
