@@ -48,7 +48,8 @@ public class TestJobs2dPatterns {
 		DriverFeature.addDriver("Logger Driver", loggerDriver);
 		DriverFeature.getDriverManager().setCurrentDriver(loggerDriver);
 
-		Job2dDriver testDriver = new Job2dDriverAdapter();
+		Job2dDriver testDriver = new
+				Job2dDriverAdapter();
 		Job2dDriver specialLineDriver = new Job2dDriverAdapter(Color.BLUE, 0.8f, true);
 		DriverFeature.addDriver("Black Line Simulator", testDriver);
 		DriverFeature.addDriver("Special Line Simulator", specialLineDriver);
