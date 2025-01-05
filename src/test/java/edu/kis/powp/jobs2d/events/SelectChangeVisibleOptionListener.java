@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SelectChangeVisibleOptionListener implements ActionListener {
-	private Window controlledWindow;
+	private final Window controlledWindow;
 
 	public SelectChangeVisibleOptionListener(Window controlledWindow) {
 		super();

@@ -4,13 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import edu.kis.powp.jobs2d.drivers.DriverManager;
-import edu.kis.powp.jobs2d.drivers.FigureDrawingStrategy;
-import edu.kis.powp.jobs2d.drivers.adapter.ExtendedAbstractDriver;
+import edu.kis.powp.jobs2d.drivers.adapter.ExtendedAbstractDrawingDriver;
 
 public class SelectTestFigureOptionListener implements ActionListener {
 
-	private DriverManager driverManager;
-	private FigureDrawingStrategy drawingStrategy;
+	private final DriverManager driverManager;
+	private final FigureDrawingStrategy drawingStrategy;
 
 	public SelectTestFigureOptionListener(DriverManager driverManager, FigureDrawingStrategy drawingStrategy) {
 		this.driverManager = driverManager;
@@ -19,7 +18,7 @@ public class SelectTestFigureOptionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ExtendedAbstractDriver driver = new ExtendedAbstractDriver(driverManager.getCurrentDriver());
+		ExtendedAbstractDrawingDriver driver = new ExtendedAbstractDrawingDriver(driverManager.getCurrentDriver());
 		drawingStrategy.drawFigure(driver);
 	}
 }
